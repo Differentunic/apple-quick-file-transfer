@@ -1,0 +1,16 @@
+{
+  "name": "apple-quick-file-transfer",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "connect-busboy": "^1.0.0",
+    "cookie-parser": ">1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.19.2",
+    "express-fileupload": "^1.5.0",
+    "morgan": "~1.10.0"
+  }
+}
