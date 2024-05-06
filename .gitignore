@@ -128,3 +128,5 @@ dist
 
 # jetbrains
 .idea/
+
+.files/
