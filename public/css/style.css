@@ -1,40 +1,99 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
 
 *,
 html {
-    margin: 0;
-    padding: 0;
-    border: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
 }
 
 html {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 body {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    background-color: rgb(236, 152, 42);
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-color: rgb(67, 143, 255);
+  overflow: hidden;
 }
 
 .center {
-    width: 100%;
-    height: 50%;
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-family: "Trebuchet MS", Helvetica, sans-serif;
-    text-align: center;
+  width: 100%;
+  height: 50%;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  text-align: center;
 }
 
 h1 {
-    font-size: 144px;
+  font-size: 144px;
+}
+h5 {
+  font-size: 36px;
+  padding: 12px;
+  padding-top: 52px;
 }
 
 p {
-    font-size: 64px;
+  font-size: 64px;
+}
+
+.button-30 {
+  align-items: center;
+  appearance: none;
+  background-color: #1d1f59;
+  border-radius: 100px;
+  border-width: 0;
+  box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #1d1f59 0 -3px 0 inset;
+  box-sizing: border-box;
+  color: #36395A;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: "JetBrains Mono",monospace;
+  height: inherit;
+  justify-content: center;
+  line-height: 1;
+  list-style: none;
+  overflow: hidden;
+  padding-left: 0px;
+  padding-right: 0px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: box-shadow .15s,transform .15s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  will-change: box-shadow,transform;
+  font-size: 18px;
+}
+
+.button-30:focus {
+  box-shadow: #1d1f59 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #1d1f59 0 -3px 0 inset;
+}
+
+.button-30:hover {
+  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #1c1f59 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+.button-30:active {
+  box-shadow: #1d1f59 0 3px 7px inset;
+  transform: translateY(2px);
 }

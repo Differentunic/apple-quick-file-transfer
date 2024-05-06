@@ -3,7 +3,11 @@ var router = express.Router();
 var path = require('path');
 var fileUpload = require('express-fileupload');
 
-router.use(fileUpload());
+router.use(fileUpload({
+    safeFileNames: true,
+    createParentPath: true,
+    preserveExtension: true
+}));
 /* GET users listing. */
 router.post('/', function (req, res, next) {
     let uploadPath;
