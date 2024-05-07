@@ -7,27 +7,28 @@
 var app = require('../app');
 var debug = require('debug')('apple-quick-file-transfer:server');
 var http = require('http');
+var crypto = require("crypto");
 
-var { networkInterfaces } = require('os');
+var {networkInterfaces} = require('os');
 
 const nets = networkInterfaces();
 const results = Object.create(null); // Or just '{}', an empty object
 
 for (const name of Object.keys(nets)) {
-  for (const net of nets[name]) {
-    // Skip over non-IPv4 and internal (i.e. 127.0.0.1) addresses
-    // 'IPv4' is in Node <= 17, from 18 it's a number 4 or 6
-    const familyV4Value = typeof net.family === 'string' ? 'IPv4' : 4
-    if (net.family === familyV4Value && !net.internal) {
-      if (!results[name]) {
-        results[name] = [];
-      }
-      results[name].push(net.address);
+    for (const net of nets[name]) {
+        // Skip over non-IPv4 and internal (i.e. 127.0.0.1) addresses
+        // 'IPv4' is in Node <= 17, from 18 it's a number 4 or 6
+        const familyV4Value = typeof net.family === 'string' ? 'IPv4' : 4
+        if (net.family === familyV4Value && !net.internal) {
+            if (!results[name]) {
+                results[name] = [];
+            }
+            results[name].push(net.address);
+        }
     }
-  }
 }
 
-console.log("Test IP Retrieval ", nets.Ethernet[3].address)
+// console.log("Test IP Retrieval ", nets.Ethernet[3].address)
 /**
  * Get port from environment and store in Express.
  */
@@ -49,24 +50,26 @@ server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
+startCli();
+
 /**
  * Normalize a port into a number, string, or false.
  */
 
 function normalizePort(val) {
-  var port = parseInt(val, 10);
+    var port = parseInt(val, 10);
 
-  if (isNaN(port)) {
-    // named pipe
-    return val;
-  }
+    if (isNaN(port)) {
+        // named pipe
+        return val;
+    }
 
-  if (port >= 0) {
-    // port number
-    return port;
-  }
+    if (port >= 0) {
+        // port number
+        return port;
+    }
 
-  return false;
+    return false;
 }
 
 /**
@@ -74,27 +77,25 @@ function normalizePort(val) {
  */
 
 function onError(error) {
-  if (error.syscall !== 'listen') {
-    throw error;
-  }
+    if (error.syscall !== 'listen') {
+        throw error;
+    }
 
-  var bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
+    var bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
 
-  // handle specific listen errors with friendly messages
-  switch (error.code) {
-    case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
-      process.exit(1);
-      break;
-    case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
-      process.exit(1);
-      break;
-    default:
-      throw error;
-  }
+    // handle specific listen errors with friendly messages
+    switch (error.code) {
+        case 'EACCES':
+            console.error(bind + ' requires elevated privileges');
+            process.exit(1);
+            break;
+        case 'EADDRINUSE':
+            console.error(bind + ' is already in use');
+            process.exit(1);
+            break;
+        default:
+            throw error;
+    }
 }
 
 /**
@@ -103,9 +104,57 @@ function onError(error) {
 
 function onListening() {
 
-  var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
-  console.info('Listening on ' + 'IP ' + nets.Ethernet[3].address + ' ' +  bind);
+    var addr = server.address();
+    var bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
+    console.info('Listening on ' + bind);
 }
+
+/*
+cli shit
+*/
+
+
+function keygen(length) {
+    return crypto.randomBytes(length).toString('hex');
+}
+
+function startCli() {
+
+    var options = ("\n" + "1. generate new key " + "\n" + "2. view all keys " + "\n" + "3. clear all keys " + "\n" + "4. stop AQFT " + "\n");
+    console.log(options);
+
+    var stdin = process.openStdin();
+    stdin.addListener("data", function (d) {
+        // note:  d is an object, and when converted to a string it will
+        // end with a linefeed.  so we (rather crudely) account for that
+        // with toString() and then trim()
+        // console.log("you entered: [" +
+        //     d.toString().trim() + "]");
+
+        process.stdout.write('\x1Bc')
+
+        switch (d.toString().trim()) {
+            case '1':
+                console.log("generate new key");
+                console.log(keygen(8));
+                break;
+            case '2':
+                console.log("view all keys");
+                break;
+            case '3':
+                console.log("clear all keys");
+                break;
+            case '4':
+                console.log("stop AQFT");
+                server.close();
+                process.exit()
+                break;
+            default:
+                console.log("please choose an option")
+                console.log(options);
+                break;
+        }
+
+    });
+}
+
