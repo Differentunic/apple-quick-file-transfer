@@ -54,7 +54,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![apple-quick-file-transfer][product-screenshot]](https://github.githubassets.com/assets/GitHub-Logo-ee398b662d42.png)
+[![apple-quick-file-transfer][product-screenshot]](docs/AQFT-Logo.png)
 
 I was annoyed at the complexity of transferring photos and videos to my pc. It was impossible to navigate through all the files and find the image you want, all while having to be physically connected.
 AQFT combats this with a super simple iOS shortcut and a webserver to handle everything. It as simple as selecting photos, videos, or even notes, and then in the share sheet, select the AQFT shortcut. Done!
@@ -156,4 +156,4 @@ Distributed under the GPL 3.0 License. See `LICENSE` for more information.
 [issues-url]: https://github.com/Differentunic/apple-quick-file-transfer/issues
 [license-shield]: https://img.shields.io/github/license/Differentunic/apple-quick-file-transfer.svg?style=for-the-badge
 [license-url]: https://github.com/Differentunic/apple-quick-file-transfer/blob/main/LICENCE
-[product-screenshot]: https://github.githubassets.com/assets/GitHub-Logo-ee398b662d42.png
+[product-screenshot]: docs/AQFT-Logo.png
